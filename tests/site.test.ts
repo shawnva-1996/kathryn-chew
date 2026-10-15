@@ -54,3 +54,27 @@ describe('whatsapp', () => {
     expect(whatsappHref()).toMatch(new RegExp(`^https://wa.me/${AGENT.phoneE164.replace('+', '')}\\?text=`));
   });
 });
+
+describe('AI-readable content', () => {
+  it('extracts the Quick questions of every post as FAQ pairs', async () => {
+    for (const p of getPosts()) {
+      expect(p.faq.length).toBeGreaterThanOrEqual(3);
+      for (const f of p.faq) {
+        expect(f.q.endsWith('?')).toBe(true);
+        expect(f.a.length).toBeGreaterThan(10);
+      }
+    }
+  });
+
+  it('builds llms.txt with every post and llms-full.txt with their full text', async () => {
+    const { llmsTxt } = await import('@/lib/llms');
+    const short = llmsTxt();
+    const full = llmsTxt(true);
+    for (const p of getPosts()) {
+      expect(short).toContain(`/blog/${p.slug}`);
+      expect(full).toContain(p.faq[0].q.slice(0, 20));
+    }
+    expect(short).toContain(AGENT.ceaReg);
+    expect(full.length).toBeGreaterThan(short.length * 3);
+  });
+});

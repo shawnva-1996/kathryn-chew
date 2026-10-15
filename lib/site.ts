@@ -25,6 +25,29 @@ export const AGENT = {
   photo: '/kathryn-chew.webp',
 } as const;
 
+/**
+ * Kathryn's profiles elsewhere. AI engines and Google join these into one "entity" for her, so every
+ * profile should use the same name, photo, role and phone. Add each URL here once it exists.
+ */
+export const PROFILES: string[] = [
+  // 'https://www.linkedin.com/in/…',
+  // 'https://www.propnex.com/…',        // PropNex agent page
+  // 'https://www.propertyguru.com.sg/agent/…',
+  // 'https://www.99.co/singapore/agents/…',
+  // Google Business Profile URL
+];
+
+/** What Kathryn writes about. Feeds schema.org `knowsAbout`. */
+export const TOPICS = [
+  'Singapore HDB resale',
+  'Singapore private property prices',
+  'Property valuation',
+  'HDB Minimum Occupation Period',
+  'CPF usage for housing',
+  'Property lease decay',
+  'CEA estate agent rules',
+] as const;
+
 export const SITE = {
   name: 'Kathryn Chew',
   tagline: 'Property decisions, with the evidence shown.',

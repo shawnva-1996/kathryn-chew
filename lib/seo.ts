@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { AGENT, SITE, SITE_URL, absoluteUrl } from './site';
+import { AGENT, PROFILES, SITE, SITE_URL, TOPICS, absoluteUrl } from './site';
 
 export function pageMetadata({
   title,
@@ -51,7 +51,9 @@ export function siteJsonLd() {
         url: absoluteUrl('/about'),
         worksFor: { '@type': 'RealEstateAgent', name: AGENT.agency, identifier: AGENT.agencyLicence },
         identifier: { '@type': 'PropertyValue', propertyID: 'CEA Registration No.', value: AGENT.ceaReg },
-        areaServed: 'SG',
+        areaServed: { '@type': 'Country', name: 'Singapore' },
+        knowsAbout: TOPICS,
+        ...(PROFILES.length ? { sameAs: PROFILES } : {}),
       },
       {
         '@type': 'WebSite',
@@ -66,16 +68,43 @@ export function siteJsonLd() {
   };
 }
 
-export function articleJsonLd(a: { title: string; description: string; slug: string; date: string }) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: a.title,
-    description: a.description,
-    datePublished: a.date,
-    dateModified: a.date,
-    author: { '@id': PERSON_ID, '@type': 'Person', name: AGENT.name },
-    mainEntityOfPage: absoluteUrl(`/blog/${a.slug}`),
-    inLanguage: 'en-SG',
-  };
+export function articleJsonLd(a: {
+  title: string;
+  description: string;
+  slug: string;
+  date: string;
+  faq: { q: string; a: string }[];
+}) {
+  const url = absoluteUrl(`/blog/${a.slug}`);
+  const graph: Record<string, unknown>[] = [
+    {
+      '@type': 'Article',
+      '@id': `${url}#article`,
+      headline: a.title,
+      description: a.description,
+      datePublished: a.date,
+      dateModified: a.date,
+      author: { '@id': PERSON_ID, '@type': 'Person', name: AGENT.name, url: absoluteUrl('/about') },
+      mainEntityOfPage: url,
+      image: absoluteUrl(AGENT.photo),
+      publisher: { '@id': PERSON_ID },
+      inLanguage: 'en-SG',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: absoluteUrl('/') },
+        { '@type': 'ListItem', position: 2, name: 'Lessons', item: absoluteUrl('/blog') },
+        { '@type': 'ListItem', position: 3, name: a.title, item: url },
+      ],
+    },
+  ];
+  if (a.faq.length) {
+    graph.push({
+      '@type': 'FAQPage',
+      '@id': `${url}#faq`,
+      mainEntity: a.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    });
+  }
+  return { '@context': 'https://schema.org', '@graph': graph };
 }

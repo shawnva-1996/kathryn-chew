@@ -10,8 +10,30 @@ export type Post = {
   /** The post's "short answer" paragraph, as plain text. Used for cards and meta descriptions. */
   description: string;
   html: string;
+  /** The markdown body, for /llms-full.txt. */
+  markdown: string;
+  /** Pairs from the post's "Quick questions" section, for FAQPage schema. */
+  faq: { q: string; a: string }[];
   readingMinutes: number;
 };
+
+const plain = (md: string) =>
+  md
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[*_`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+/** Reads "**Question?**\nAnswer" pairs under a "## Quick questions" heading. */
+export function extractFaq(body: string): { q: string; a: string }[] {
+  const m = body.match(/^## Quick questions[ \t]*\n([\s\S]*?)(?=\n---|\n## |(?![\s\S]))/m);
+  if (!m) return [];
+  return m[1]
+    .split(/\n\s*\n/)
+    .map((block) => block.trim().match(/^\*\*(.+?)\*\*\s*\n([\s\S]+)$/))
+    .filter((x): x is RegExpMatchArray => !!x)
+    .map((x) => ({ q: plain(x[1]), a: plain(x[2]) }));
+}
 
 const DIR = path.join(process.cwd(), 'content', 'blog');
 
@@ -32,11 +54,7 @@ export function parsePost(raw: string): Post {
 
   const body = m[2].trim();
   const first = body.split(/\n\s*\n/)[0] ?? '';
-  const description = first
-    .replace(/^\*\*The short answer:\*\*\s*/i, '')
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    .replace(/[*_`]/g, '')
-    .trim();
+  const description = plain(first.replace(/^\*\*The short answer:\*\*\s*/i, ''));
 
   const html = marked.parse(body, { async: false, gfm: true }) as string;
   const words = body.split(/\s+/).length;
@@ -47,6 +65,8 @@ export function parsePost(raw: string): Post {
     reader: fm.reader ?? '',
     description,
     html: externalLinks(html),
+    markdown: body,
+    faq: extractFaq(body),
     readingMinutes: Math.max(1, Math.round(words / 220)),
   };
 }

@@ -49,6 +49,20 @@ npm run lint
   and block numbers withheld. Replace them when the real sample PDF is ready.
 - **Photo**: `public/kathryn-chew.webp`, cut out of the same report page.
 
+## AI search (GEO)
+
+What the site does so ChatGPT, Gemini, Claude, Perplexity, Copilot and Google AI Overviews can find and cite it:
+
+- `robots.txt` names the search and AI crawlers explicitly and allows them (`app/robots.ts`).
+- `/llms.txt` and `/llms-full.txt` give assistants a plain-markdown map of the site and every post in full (`lib/llms.ts`).
+- Every post carries `Article`, `BreadcrumbList` and `FAQPage` JSON-LD; the FAQ comes from each post's "Quick questions".
+- `Person` schema has Kathryn's CEA number, agency, topics (`TOPICS`) and, once filled in, her profiles (`PROFILES` in
+  `lib/site.ts`). Add every profile URL there: LinkedIn, PropNex page, PropertyGuru/99.co agent pages, Google Business Profile.
+- IndexNow: after each deploy that adds or edits pages, run `node scripts/indexnow.mjs https://<domain>` so Bing (which
+  also feeds Copilot and ChatGPT search) recrawls quickly. The key file is in `public/`.
+
+The full off-site plan is in Aurelis-group: `content_research/KATHRYN_GEO_PLAYBOOK_2026-10-15.md`.
+
 ## Not yet done
 
 - The sample PDF itself. The form promises it by email "as soon as it's ready".
