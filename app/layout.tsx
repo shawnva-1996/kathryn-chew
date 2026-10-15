@@ -24,6 +24,11 @@ export const metadata: Metadata = {
   openGraph: { siteName: SITE.name, locale: SITE.locale, type: 'website' },
   robots: { index: true, follow: true },
   formatDetection: { telephone: false },
+  // Ownership proof for Google Search Console and Bing Webmaster Tools (public tokens, safe to commit).
+  verification: {
+    google: 'ql8To1DqETkNhmYAR6B26lCGjkNKaBzg2BtEZB9Kwh8',
+    other: { 'msvalidate.01': '26D9FD6422A95F3EA54F2FCA9DB2C626' },
+  },
 };
 
 export const viewport: Viewport = {
