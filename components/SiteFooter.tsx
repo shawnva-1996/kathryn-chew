@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getPosts } from '@/lib/blog';
 import { AGENT, SITE } from '@/lib/site';
 import { BrandMark } from './BrandMark';
 import { WhatsAppLink } from './WhatsAppLink';
@@ -13,7 +14,9 @@ export function SiteFooter() {
               <BrandMark className="brand-mark" />
               {AGENT.name}
             </Link>
-            <p style={{ maxWidth: '38ch', marginTop: 16 }}>{SITE.tagline}</p>
+            <p className="footer-promise" style={{ marginTop: 20 }}>
+              {SITE.tagline}
+            </p>
           </div>
           <div>
             <h2>Explore</h2>
@@ -30,6 +33,18 @@ export function SiteFooter() {
             </ul>
           </div>
           <div>
+            <h2>Latest lessons</h2>
+            <ul>
+              {getPosts()
+                .slice(0, 4)
+                .map((p) => (
+                  <li key={p.slug}>
+                    <Link href={`/blog/${p.slug}`}>{p.title.split(/[?:]/)[0]}</Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+          <div>
             <h2>Talk to Kathryn</h2>
             <ul>
               <li>
@@ -37,6 +52,9 @@ export function SiteFooter() {
               </li>
               <li>
                 <a href={`tel:${AGENT.phoneE164}`}>Call {AGENT.phoneDisplay}</a>
+              </li>
+              <li>
+                <Link href="/privacy">Privacy notice</Link>
               </li>
             </ul>
           </div>

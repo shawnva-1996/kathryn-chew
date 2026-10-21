@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { SampleReport } from '@/components/SampleReport';
 import { SampleRequestForm } from '@/components/SampleRequestForm';
 import { WhatsAppLink } from '@/components/WhatsAppLink';
+import { PHOTOS } from '@/lib/photos';
 import { pageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = pageMetadata({
@@ -14,15 +16,20 @@ export const metadata: Metadata = pageMetadata({
 export default function ValuationPage() {
   return (
     <>
-      <section className="hero" style={{ paddingBottom: 40 }}>
-        <div className="wrap">
-          <h1 className="display-l" style={{ maxWidth: '16ch' }}>
-            A valuation summary you can actually read.
-          </h1>
-          <p className="lede">
-            Most valuation reports are pages of tables and charts. Kathryn&rsquo;s summary turns them into three plain answers: what
-            the property is worth, how to get in, and how to get out.
-          </p>
+      <section className="page-hero">
+        <div className="wrap page-hero-split">
+          <div>
+            <h1 className="display-l" style={{ maxWidth: '16ch' }}>
+              A valuation summary you can actually read.
+            </h1>
+            <p className="lede">
+              Most valuation reports are pages of tables and charts. Kathryn&rsquo;s summary turns them into three plain answers: what
+              the property is worth, how to get in, and how to get out.
+            </p>
+          </div>
+          <figure className="hero-side-photo">
+            <Image src={PHOTOS.coupleSigning.src} alt={PHOTOS.coupleSigning.alt} width={PHOTOS.coupleSigning.width} height={PHOTOS.coupleSigning.height} priority sizes="(min-width: 960px) 480px, 100vw" />
+          </figure>
         </div>
       </section>
 
