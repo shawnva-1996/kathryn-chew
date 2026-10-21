@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, BookOpen, CalendarClock, FileText, LineChart, LogIn, LogOut, ScrollText, TriangleAlert } from 'lucide-react';
+import { PhotoPair } from '@/components/PhotoPair';
 import { PostCard } from '@/components/PostCard';
 import { PriceStrip } from '@/components/PriceStrip';
 import { Reveal } from '@/components/Reveal';
@@ -29,38 +30,54 @@ export default function HomePage() {
   const posts = getPosts();
   return (
     <>
-      <section className="hero">
-        <div className="wrap hero-grid">
-          <div>
-            <h1 className="display-l">Visualising property data to support your next move.</h1>
-            <p className="lede">
-              Kathryn Chew offers visual, data-driven and dynamic property analysis for home buyers and home sellers in Singapore.
-              Every price, rule and timeline comes with the evidence shown.
-            </p>
-            <div className="hero-actions">
-              <Link href="/valuation" className="btn btn-primary">
-                See a sample valuation <ArrowRight aria-hidden="true" />
-              </Link>
-              <WhatsAppLink className="btn btn-ghost">WhatsApp Kathryn</WhatsAppLink>
-            </div>
+      <section className="hero-center">
+        <div className="wrap">
+          <h1 className="display-l">Visualising property data to support your next move.</h1>
+          <p className="hero-sub">Evidence, not guesswork.</p>
+          <p className="lede">
+            Visual, data-driven and dynamic property analysis for home buyers and home sellers in Singapore. Every price, rule and timeline
+            comes with the evidence shown.
+          </p>
+          <div className="hero-actions">
+            <Link href="/valuation" className="btn btn-primary">
+              See a sample valuation <ArrowRight aria-hidden="true" />
+            </Link>
+            <WhatsAppLink className="btn btn-ghost">WhatsApp Kathryn</WhatsAppLink>
           </div>
-          <figure className="agent-card" style={{ margin: 0 }}>
-            <Image src={AGENT.photo} alt="Kathryn Chew" width={800} height={937} priority sizes="(min-width: 960px) 420px, 90vw" />
+        </div>
+      </section>
+
+      <PhotoPair a={PHOTOS.hdbEstate} b={PHOTOS.condo} priority />
+
+      <section className="section" aria-labelledby="welcome-title">
+        <div className="wrap welcome">
+          <figure className="welcome-photo">
+            <Image src={AGENT.photo} alt="Kathryn Chew" width={800} height={937} sizes="(min-width: 900px) 420px, 90vw" />
             <figcaption>
               <strong>{AGENT.name}</strong>
               {AGENT.title}, {AGENT.agency}
               <br />
-              <span className="muted">CEA Reg. No. {AGENT.ceaReg}</span>
+              CEA Reg. No. {AGENT.ceaReg}
             </figcaption>
           </figure>
+          <div>
+            <h2 id="welcome-title" className="display-m">
+              Welcome. I&rsquo;m Kathryn Chew.
+            </h2>
+            <p className="lede">
+              I turn Singapore property data into clear pictures and plain answers, so you can see what a fair price looks like before you
+              buy or sell.
+            </p>
+            <p>
+              Every price opinion comes with the real sales behind it. Every rule comes with its date and the official source. If the data
+              isn&rsquo;t enough to answer your question, I&rsquo;ll tell you.
+            </p>
+            <Link href="/about" className="link-arrow">
+              Find out more <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </section>
-
-      <div className="wrap">
-        <figure className="photo-band">
-          <Image src={PHOTOS.hdbPunggol.src} alt={PHOTOS.hdbPunggol.alt} width={PHOTOS.hdbPunggol.width} height={PHOTOS.hdbPunggol.height} sizes="(min-width: 1280px) 1200px, 100vw" />
-        </figure>
-      </div>
 
       <section className="section section-alt" aria-labelledby="want-title">
         <div className="wrap">
@@ -222,8 +239,10 @@ export default function HomePage() {
         </div>
       </section>
 
+      <PhotoPair a={PHOTOS.coupleSigning} b={PHOTOS.hdbPunggol} />
+
       {posts.length ? (
-        <section className="section section-alt" aria-labelledby="posts-title">
+        <section className="section" aria-labelledby="posts-title">
           <div className="wrap">
             <div className="section-head split">
               <h2 id="posts-title" className="display-m">
@@ -249,14 +268,12 @@ export default function HomePage() {
       ) : null}
 
       <section className="section section-deep" aria-labelledby="cta-title">
-        <div className="wrap cta-band">
+        <div className="wrap narrow cta-center">
           <div>
             <h2 id="cta-title" className="display-m">
               See what a valuation summary looks like.
             </h2>
-            <p className="lede" style={{ marginTop: 18 }}>
-              Leave your email and Kathryn will send the sample summary: one property, explained in plain language.
-            </p>
+            <p className="lede">Leave your email and Kathryn will send the sample summary: one property, explained in plain language.</p>
           </div>
           <div className="hero-actions">
             <Link href="/valuation#sample-form" className="btn btn-primary">

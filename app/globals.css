@@ -1,45 +1,49 @@
 /* ==========================================================================
-   Kathryn Chew — visual system, copied from the VizGrow website
-   (shawnva-1996/vizgrow, website/vizgrow): graphite canvas, warm off-white
-   type, one restrained electric accent. Free Adobe Stock photography sits on
-   the canvas in rounded, hairline-bordered frames. Charts and numbers still
-   carry the page.
+   Kathryn Chew — visual system (v3)
+   Layout and rhythm follow 11co.one: a big uppercase statement, short
+   welcome copy, paired photo banners between sections, plain text blocks
+   split by hairline rules, square buttons, a quiet footer.
+   Colour is our own: a data-analytics, cyberpunk night palette. Deep ink
+   canvas with a faint grid, neon cyan as the accent, hot magenta as the
+   second voice. Numbers and labels are set in a monospace.
    ========================================================================== */
 
 :root {
-  --bg: #0b0d0e;
-  --bg-2: #111416;
-  --bg-3: #171b1d;
-  --surface: #111416;
-  --line: #262b2e;
-  --line-2: #343a3e;
-  --ink: #f3f1ea;
-  --ink-2: #dcdad3;
-  --muted: #a7aaa5;
-  --dim: #6f746f;
-  /* One accent, as on VizGrow. Swap these three lines to re-colour the whole site. */
-  --teal: #c8ff3d;
-  --teal-2: #d6ff6e;
-  --teal-soft: rgba(200, 255, 61, 0.1);
-  --accent-ink: #0b0d0e;
-  --clay: #e7b574;
-  --clay-soft: rgba(231, 181, 116, 0.14);
-  --gold: #e7b574;
-  --warm-bg: #17130f;
-  --deep: #111416;
-  --deep-2: #171b1d;
-  --on-deep: #f3f1ea;
-  --on-deep-muted: #a7aaa5;
-  --danger: #ff8a6b;
+  --bg: #04060d;
+  --bg-2: #080c18;
+  --bg-3: #0e1426;
+  --surface: #080c18;
+  --line: #18213a;
+  --line-2: #27345a;
+  --ink: #e8f0ff;
+  --ink-2: #c6d2ec;
+  --muted: #8f9bbd;
+  --dim: #5c6788;
+  /* Accent (named --teal for history). Swap these lines to re-colour the whole site. */
+  --teal: #00e5ff;
+  --teal-2: #6ff3ff;
+  --teal-soft: rgba(0, 229, 255, 0.1);
+  --glow: 0 0 18px rgba(0, 229, 255, 0.35);
+  --accent-ink: #04060d;
+  --clay: #ff2e97;
+  --clay-soft: rgba(255, 46, 151, 0.14);
+  --gold: #ff2e97;
+  --warm-bg: #0e0a1a;
+  --deep: #070a15;
+  --deep-2: #0e1426;
+  --on-deep: #e8f0ff;
+  --on-deep-muted: #8f9bbd;
+  --danger: #ff6b8b;
 
-  --font-display: var(--font-inter-tight), 'Inter Tight', system-ui, sans-serif;
+  --font-display: var(--font-display-face), 'Chakra Petch', system-ui, sans-serif;
   --font-body: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), 'JetBrains Mono', ui-monospace, monospace;
 
   --gutter: clamp(16px, 5vw, 72px);
   --max: 1280px;
-  --radius: 16px;
+  --radius: 2px;
   --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
-  --header-h: 64px;
+  --header-h: 68px;
   --shadow: none;
 
   color-scheme: dark;
@@ -110,7 +114,7 @@ a {
   background: var(--teal);
   color: var(--accent-ink);
   padding: 10px 16px;
-  border-radius: 8px;
+  border-radius: var(--radius);
   font-weight: 600;
 }
 .skip-link:focus {
@@ -263,7 +267,7 @@ p {
   top: 0;
   z-index: 50;
   height: var(--header-h);
-  background: rgba(11, 13, 14, 0.82);
+  background: rgba(4, 6, 13, 0.82);
   backdrop-filter: saturate(1.4) blur(14px);
   -webkit-backdrop-filter: saturate(1.4) blur(14px);
   border-bottom: 1px solid var(--line);
@@ -313,7 +317,7 @@ p {
   height: 44px;
   display: grid;
   place-items: center;
-  border-radius: 12px;
+  border-radius: var(--radius);
   border: 1px solid var(--line-2);
   background: var(--surface);
   color: var(--ink);
@@ -417,7 +421,7 @@ p {
 .agent-card {
   position: relative;
   background: linear-gradient(180deg, var(--bg-3) 0%, var(--bg-2) 100%);
-  border-radius: 24px;
+  border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--line);
   max-width: 420px;
@@ -435,10 +439,10 @@ p {
   left: 14px;
   right: 14px;
   bottom: 14px;
-  background: rgba(11, 13, 14, 0.86);
+  background: rgba(4, 6, 13, 0.86);
   border: 1px solid var(--line);
   backdrop-filter: blur(8px);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 14px 16px;
   box-shadow: var(--shadow);
   font-size: 0.9rem;
@@ -507,7 +511,7 @@ a.card:hover {
 .icon-chip {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: var(--radius);
   display: grid;
   place-items: center;
   background: var(--teal-soft);
@@ -558,7 +562,7 @@ a.card:hover {
 .chart-card {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 20px;
+  border-radius: var(--radius);
   padding: clamp(20px, 3.5vw, 40px);
   box-shadow: var(--shadow);
 }
@@ -661,7 +665,7 @@ a.card:hover {
 .report {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 22px;
+  border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow: hidden;
 }
@@ -720,7 +724,7 @@ a.card:hover {
   display: grid;
   gap: 6px;
   padding: 20px;
-  border-radius: 14px;
+  border-radius: var(--radius);
   background: var(--teal-soft);
   margin-bottom: 20px;
 }
@@ -804,7 +808,7 @@ a.card:hover {
 .plan-list li {
   padding: 16px 18px;
   border: 1px dashed var(--line-2);
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: var(--bg);
 }
 .plan-list strong {
@@ -832,7 +836,7 @@ a.card:hover {
 .form-card {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 20px;
+  border-radius: var(--radius);
   padding: clamp(22px, 3.5vw, 36px);
   box-shadow: var(--shadow);
 }
@@ -854,7 +858,7 @@ a.card:hover {
   font: inherit;
   min-height: 50px;
   padding: 0 14px;
-  border-radius: 12px;
+  border-radius: var(--radius);
   border: 1px solid var(--line-2);
   background: var(--bg);
   color: var(--ink);
@@ -887,7 +891,7 @@ a.card:hover {
   margin: 12px 0 0;
 }
 .form-done {
-  border-radius: 14px;
+  border-radius: var(--radius);
   background: var(--teal-soft);
   padding: 20px;
 }
@@ -1032,7 +1036,7 @@ a.card:hover {
   color: var(--ink);
   background: var(--teal-soft);
   border-left: 3px solid var(--teal);
-  border-radius: 0 12px 12px 0;
+  border-radius: 0;
   padding: 18px 20px;
 }
 .prose table {
@@ -1065,7 +1069,7 @@ a.card:hover {
   gap: 18px;
   align-items: center;
   padding: 22px;
-  border-radius: 16px;
+  border-radius: var(--radius);
   border: 1px solid var(--line);
   background: var(--surface);
   margin-bottom: 64px;
@@ -1163,7 +1167,7 @@ a.card:hover {
   right: 16px;
   bottom: 16px;
   z-index: 40;
-  box-shadow: 0 8px 24px rgba(200, 255, 61, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 229, 255, 0.3);
 }
 @media (min-width: 880px) {
   .float-wa {
@@ -1246,7 +1250,7 @@ a.card:hover {
   margin: 0;
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: var(--radius);
   border: 1px solid var(--line);
   background: var(--bg-2);
 }
@@ -1328,9 +1332,9 @@ a.card:hover {
   display: grid;
   gap: 24px;
   border: 1px solid var(--teal);
-  border-radius: 22px;
+  border-radius: var(--radius);
   padding: clamp(24px, 4vw, 48px);
-  background: linear-gradient(135deg, rgba(200, 255, 61, 0.06), transparent 60%), var(--bg-2);
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.07), transparent 60%), var(--bg-2);
   text-decoration: none;
 }
 @media (min-width: 900px) {
@@ -1444,7 +1448,7 @@ a.card:hover {
   display: block;
   text-decoration: none;
   border: 1px solid var(--line-2);
-  border-radius: 18px;
+  border-radius: var(--radius);
   padding: 24px;
   background: var(--bg-2);
   transition: transform 0.25s var(--ease), border-color 0.25s;
@@ -1543,9 +1547,9 @@ a.card:hover {
   display: grid;
   gap: 28px;
   border: 1px solid var(--teal);
-  border-radius: 22px;
+  border-radius: var(--radius);
   padding: clamp(22px, 4vw, 40px);
-  background: linear-gradient(135deg, rgba(200, 255, 61, 0.06), transparent 60%), var(--bg-2);
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.07), transparent 60%), var(--bg-2);
   margin: 8px 0 40px;
   scroll-margin-top: calc(var(--header-h) + 16px);
 }
@@ -1651,7 +1655,7 @@ a.card:hover {
 .gift-doc {
   background: var(--bg-2);
   border: 1px solid var(--line);
-  border-radius: 20px;
+  border-radius: var(--radius);
   padding: clamp(22px, 4vw, 44px);
 }
 .gift-doc h1 {
@@ -1742,7 +1746,7 @@ a.card:hover {
 .admin-scroll {
   overflow-x: auto;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius);
 }
 .admin-table th,
 .admin-table td {
@@ -1799,7 +1803,7 @@ a.card:hover {
   background: var(--bg);
   color: var(--ink);
   border: 1px solid var(--line-2);
-  border-radius: 8px;
+  border-radius: var(--radius);
   padding: 4px 8px;
 }
 .admin-table a {
@@ -1808,7 +1812,7 @@ a.card:hover {
 .photo-band {
   margin: 0;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: var(--radius);
   border: 1px solid var(--line);
   aspect-ratio: 2000 / 638;
 }
@@ -1844,4 +1848,472 @@ figure img {
 .card-photo img,
 .photo-band img {
   height: 100%;
+}
+
+/* ==========================================================================
+   v3 — 11co.one layout language on the night palette.
+   Overrides earlier rules on purpose: uppercase display type, square
+   cut-corner buttons, text blocks split by rules instead of boxed cards,
+   paired photo banners, monospace for every label and number.
+   ========================================================================== */
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1100px 560px at 88% -8%, rgba(0, 229, 255, 0.09), transparent 62%),
+    radial-gradient(900px 520px at -12% 28%, rgba(255, 46, 151, 0.06), transparent 62%),
+    linear-gradient(rgba(0, 229, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.035) 1px, transparent 1px);
+  background-size:
+    auto,
+    auto,
+    56px 56px,
+    56px 56px;
+}
+.section-alt {
+  background: rgba(8, 12, 24, 0.72);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.section-deep {
+  background: rgba(7, 10, 21, 0.9);
+}
+
+/* Type: one big uppercase voice, as on 11co. */
+h1,
+h2,
+h3,
+.display {
+  letter-spacing: 0;
+  font-weight: 700;
+}
+.display-l,
+.display-m,
+.page-hero h1,
+.article-head h1,
+.gift-doc h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.98;
+}
+.display-l {
+  font-size: clamp(2.4rem, 7.2vw, 6rem);
+  line-height: 0.94;
+}
+.display-m {
+  font-size: clamp(1.9rem, 4.2vw, 3.2rem);
+}
+.article-head h1 {
+  font-size: clamp(2rem, 4.6vw, 3.4rem);
+}
+.num,
+.stat .value,
+.big-value .value {
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
+}
+.card-pillar,
+.post-meta,
+.post-card time,
+.crumbs,
+.chart-hint,
+.stat .label,
+.aspirations .n,
+.part-head .n,
+.gift-kicker,
+.site-footer h2,
+.cea-line,
+.pill,
+.facts dt,
+.photo-credit,
+.continue .k,
+.related h2 {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.74rem;
+}
+.price-strip text {
+  font-family: var(--font-mono);
+}
+
+/* Buttons: square with clipped corners. */
+.btn {
+  border-radius: 0;
+  font: 600 0.8rem/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 0 24px;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+.btn-primary:hover {
+  background: var(--teal-2);
+}
+.btn-ghost,
+.section-deep .btn-ghost {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: rgba(0, 229, 255, 0.04);
+  clip-path: none;
+}
+.btn-ghost:hover,
+.section-deep .btn-ghost:hover {
+  background: var(--teal-soft);
+  border-color: var(--teal-2);
+  color: var(--teal-2);
+}
+.btn-sm {
+  font-size: 0.74rem;
+  padding: 0 16px;
+}
+.link-arrow {
+  font: 600 0.8rem/1.4 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Header: logo left, spaced uppercase links, one call to action. */
+.site-header {
+  border-bottom-color: var(--line-2);
+}
+.brand {
+  font: 700 1.05rem/1 var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.nav-desktop {
+  gap: 32px;
+}
+.nav-desktop a:not(.btn) {
+  font: 500 0.78rem/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-2);
+}
+.menu-btn {
+  border-radius: 0;
+  border-color: var(--teal);
+  color: var(--teal);
+  background: transparent;
+}
+.mobile-menu {
+  z-index: 60;
+  overflow-y: auto;
+  padding-top: 32px;
+  background:
+    linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+    var(--bg);
+  background-size:
+    56px 56px,
+    56px 56px,
+    auto;
+}
+.mobile-menu a {
+  font: 700 2rem/1.1 var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 18px 0;
+  border-bottom-color: var(--line-2);
+}
+.mobile-menu a:last-child {
+  font: 600 0.9rem/1.4 var(--font-mono);
+  letter-spacing: 0.12em;
+  color: var(--teal);
+  border-bottom: 0;
+  padding-top: 28px;
+}
+
+/* Home hero: a centred statement, a second line, a short welcome. */
+.hero-center {
+  text-align: center;
+  padding: clamp(64px, 12vw, 160px) 0 clamp(56px, 9vw, 120px);
+}
+.hero-center h1 {
+  max-width: 15ch;
+  margin: 0 auto 22px;
+}
+.hero-sub {
+  margin: 0 auto 28px;
+  font: 600 clamp(0.95rem, 2vw, 1.35rem)/1.3 var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--teal);
+  text-shadow: var(--glow);
+}
+.hero-center .lede {
+  margin: 0 auto 36px;
+  max-width: 58ch;
+}
+.hero-center .hero-actions {
+  justify-content: center;
+}
+
+/* Paired photo banners between sections. */
+.photo-pair {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--line);
+  border-top: 1px solid var(--line-2);
+  border-bottom: 1px solid var(--line-2);
+}
+.photo-pair figure,
+.photo-pair > div {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  min-width: 0;
+}
+.photo-pair img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 640px) {
+  .photo-pair figure,
+  .photo-pair > div {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+/* Every photo gets the same night grade: a little darker, cool, with a faint neon wash. */
+.photo-pair img,
+.photo-band img,
+.hero-photo img,
+.hero-side-photo img,
+.cover-photo img,
+.card-photo img,
+.welcome-photo img {
+  filter: saturate(0.85) contrast(1.06) brightness(0.86);
+}
+.photo-pair figure::after,
+.photo-pair > div::after,
+.photo-band::after,
+.hero-side-photo::after,
+.cover-photo::after,
+.card-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(140deg, rgba(0, 229, 255, 0.16), transparent 45%, rgba(255, 46, 151, 0.16));
+  mix-blend-mode: screen;
+}
+.photo-band {
+  position: relative;
+}
+.hero-photo,
+.hero-side-photo,
+.cover-photo,
+.card-photo,
+.photo-band,
+.agent-card {
+  border-radius: var(--radius);
+}
+
+/* Welcome block: Kathryn's photo beside a short introduction. */
+.welcome {
+  display: grid;
+  gap: clamp(32px, 6vw, 72px);
+  align-items: center;
+}
+.welcome > * {
+  min-width: 0;
+}
+.welcome-photo {
+  margin: 0;
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  justify-self: center;
+  border: 1px solid var(--line-2);
+  background: var(--bg-3);
+}
+.welcome-photo::before,
+.welcome-photo::after {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--teal);
+  z-index: 1;
+}
+.welcome-photo::before {
+  top: -6px;
+  left: -6px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.welcome-photo::after {
+  right: -6px;
+  bottom: -6px;
+  border-left: 0;
+  border-top: 0;
+  border-color: var(--clay);
+}
+.welcome-photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 800 / 937;
+  object-fit: cover;
+}
+.welcome-photo figcaption {
+  padding: 14px 16px;
+  border-top: 1px solid var(--line-2);
+  font: 500 0.74rem/1.6 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.welcome-photo figcaption strong {
+  display: block;
+  color: var(--ink);
+  font: 700 1rem/1.3 var(--font-display);
+  letter-spacing: 0.08em;
+}
+.welcome h2 {
+  margin-bottom: 22px;
+}
+.welcome p {
+  color: var(--muted);
+  max-width: 56ch;
+  margin: 0 0 18px;
+}
+@media (min-width: 900px) {
+  .welcome {
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+}
+
+/* Cards become plain text blocks split by a rule. */
+.card {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--line-2);
+  border-radius: 0;
+  padding: 26px 0 8px;
+}
+a.card:hover {
+  transform: none;
+  border-top-color: var(--teal);
+}
+a.card:hover h3 {
+  color: var(--teal);
+}
+.card h3 {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+}
+.icon-chip {
+  border-radius: 0;
+  background: transparent;
+  border: 1px solid var(--teal);
+  box-shadow: var(--glow);
+}
+.post-card {
+  background: transparent;
+  border-top: 0;
+  padding: 0;
+}
+.post-card .card-photo {
+  border: 1px solid var(--line-2);
+}
+.post-card .card-body {
+  padding: 18px 0 8px;
+}
+.post-card h3 {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 1.2rem;
+}
+.post-card:hover .card-photo {
+  border-color: var(--teal);
+}
+.card-pillar {
+  color: var(--teal);
+}
+.aspirations .n {
+  color: var(--clay);
+  font-size: 0.85rem;
+}
+.aspirations h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* Panels that stay panels: chart, report, forms, gift. */
+.chart-card,
+.report,
+.form-card,
+.gift-box,
+.start-here,
+.continue {
+  border-radius: var(--radius);
+}
+.chart-card,
+.report {
+  box-shadow:
+    0 0 0 1px rgba(0, 229, 255, 0.08),
+    0 30px 80px -40px rgba(0, 229, 255, 0.25);
+}
+.stat.accent .value,
+.stat.accent {
+  color: var(--teal);
+}
+.field input,
+.field select {
+  border-radius: 0;
+}
+.price-strip .dot.match {
+  filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.8));
+}
+
+/* Closing call to action, set like 11co's newsletter block: centred. */
+.cta-center {
+  text-align: center;
+}
+.cta-center .lede {
+  margin: 18px auto 32px;
+}
+.cta-center .hero-actions {
+  justify-content: center;
+}
+
+/* Footer: logo and details over a rule. */
+.site-footer {
+  border-top: 1px solid var(--line-2);
+  background: rgba(4, 6, 13, 0.9);
+}
+.cea-line {
+  line-height: 1.8;
+}
+
+.pillar-nav a,
+.pill {
+  border-radius: 0;
+}
+.pillar-nav a[aria-current='page'],
+.pillar-nav a:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+.topic-block-head h2,
+.related h2,
+.start-here h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.photo-pair img {
+  filter: saturate(0.8) contrast(1.08) brightness(0.74);
+}
+.details dt {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
 }
