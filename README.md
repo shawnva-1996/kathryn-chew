@@ -62,8 +62,9 @@ What the site does so ChatGPT, Gemini, Claude, Perplexity, Copilot and Google AI
 - Every post carries `Article`, `BreadcrumbList` and `FAQPage` JSON-LD; the FAQ comes from each post's "Quick questions".
 - `Person` schema has Kathryn's CEA number, agency, topics (`TOPICS`) and, once filled in, her profiles (`PROFILES` in
   `lib/site.ts`). Add every profile URL there: LinkedIn, PropNex page, PropertyGuru/99.co agent pages, Google Business Profile.
-- IndexNow: after each deploy that adds or edits pages, run `node scripts/indexnow.mjs https://<domain>` so Bing (which
-  also feeds Copilot and ChatGPT search) recrawls quickly. The key file is in `public/`.
+- IndexNow: `.github/workflows/indexnow.yml` runs `node scripts/indexnow.mjs` after every successful Vercel production
+  deploy (or by hand from the Actions tab), so Bing (which also feeds Copilot and ChatGPT search) recrawls quickly. The key
+  file is in `public/`. Change the URL in the workflow when the site moves to a custom domain.
 
 The full off-site plan is in Aurelis-group: `content_research/KATHRYN_GEO_PLAYBOOK_2026-10-15.md`.
 
