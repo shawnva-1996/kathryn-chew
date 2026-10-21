@@ -1,0 +1,52 @@
+rules_version = '2';
+
+// Leads from the website's gift forms.
+// - The public may only CREATE a lead, with exactly the fields the form sends, and later set waClickedAt once.
+// - Only admins may read, update or delete leads. An admin is any signed-in Firebase Auth user whose uid has a
+//   document in the `admins` collection. Add that document by hand in the Firebase console; no email address
+//   or password lives in this file.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function str(v, min, max) {
+      return v is string && v.size() >= min && v.size() <= max;
+    }
+
+    function validLead(d) {
+      return d.keys().hasOnly(['name', 'phone', 'email', 'consent', 'consentText', 'giftSlug', 'postSlug', 'page', 'status', 'createdAt', 'waClickedAt'])
+        && d.keys().hasAll(['name', 'phone', 'email', 'consent', 'consentText', 'giftSlug', 'postSlug', 'status', 'createdAt'])
+        && str(d.name, 2, 80)
+        && d.phone is string && d.phone.matches('^\\+[1-9][0-9]{7,14}$')
+        && str(d.email, 6, 254) && d.email.matches('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')
+        && d.consent == true
+        && str(d.consentText, 20, 600)
+        && str(d.giftSlug, 1, 80)
+        && str(d.postSlug, 1, 120)
+        && (!('page' in d) || str(d.page, 0, 200))
+        && d.status == 'new'
+        && d.createdAt == request.time
+        && (!('waClickedAt' in d) || d.waClickedAt == null);
+    }
+
+    match /leads/{leadId} {
+      allow create: if validLead(request.resource.data);
+      allow read, delete: if isAdmin();
+      allow update: if isAdmin()
+        || (resource.data.waClickedAt == null
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['waClickedAt'])
+            && request.resource.data.waClickedAt == request.time);
+    }
+
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { marked } from 'marked';
+import { PHOTOS, type Photo } from './photos';
 
 export type Post = {
   slug: string;
@@ -15,6 +16,31 @@ export type Post = {
   /** Pairs from the post's "Quick questions" section, for FAQPage schema. */
   faq: { q: string; a: string }[];
   readingMinutes: number;
+  topic: TopicId;
+  photo: Photo;
+};
+
+/** Library topics, in the order a reader usually meets them. */
+export const TOPICS_LIST = [
+  { id: 'price', label: 'Checking a price', for: 'I want to know whether a price is fair before I offer.' },
+  { id: 'buying', label: 'Buying', for: 'I’m buying and don’t want a surprise after I sign.' },
+  { id: 'selling', label: 'Selling', for: 'I’m selling and want to know what I’ll really walk away with.' },
+  { id: 'renting', label: 'Renting out', for: 'I’m renting out my home or a room and want to stay inside the rules.' },
+] as const;
+export type TopicId = (typeof TOPICS_LIST)[number]['id'];
+
+/** Per-post placement: library topic and cover photo. New posts must be added here, newest first. */
+const POST_META: Record<string, { topic: TopicId; photo: Photo }> = {
+  'how-to-check-if-a-condo-asking-price-is-fair': { topic: 'price', photo: PHOTOS.condo },
+  'hdb-cash-proceeds-second-hdb-loan': { topic: 'selling', photo: PHOTOS.movingBoxes },
+  'hdb-negative-sale-cpf-refund': { topic: 'selling', photo: PHOTOS.calculator },
+  'sellers-stamp-duty-22-days-too-early': { topic: 'selling', photo: PHOTOS.clockCalendar },
+  'check-hdb-floor-area-before-offer': { topic: 'buying', photo: PHOTOS.floorPlan },
+  'option-to-purchase-expiry-date': { topic: 'buying', photo: PHOTOS.calendarPages },
+  'landlord-tenant-identity-checks': { topic: 'renting', photo: PHOTOS.houseKeys },
+  'renting-out-hdb-bedrooms-without-living-there': { topic: 'renting', photo: PHOTOS.bedroom },
+  'gst-surprise-on-industrial-property-purchase': { topic: 'buying', photo: PHOTOS.factory },
+  'who-does-this-agent-actually-represent': { topic: 'selling', photo: PHOTOS.handshake },
 };
 
 const plain = (md: string) =>
@@ -55,6 +81,7 @@ export function parsePost(raw: string): Post {
   const body = m[2].trim();
   const first = body.split(/\n\s*\n/)[0] ?? '';
   const description = plain(first.replace(/^\*\*The short answer:\*\*\s*/i, ''));
+  const lead = description.charAt(0).toUpperCase() + description.slice(1);
 
   const html = marked.parse(body, { async: false, gfm: true }) as string;
   const words = body.split(/\s+/).length;
@@ -63,11 +90,13 @@ export function parsePost(raw: string): Post {
     title: fm.title,
     date: fm.date,
     reader: fm.reader ?? '',
-    description,
+    description: lead,
     html: externalLinks(html),
     markdown: body,
     faq: extractFaq(body),
     readingMinutes: Math.max(1, Math.round(words / 220)),
+    topic: POST_META[fm.slug]?.topic ?? 'buying',
+    photo: POST_META[fm.slug]?.photo ?? PHOTOS.hdbEstate,
   };
 }
 
@@ -88,11 +117,7 @@ export function getPosts(): Post[] {
   return cache;
 }
 
-const BLOG_ORDER = [
-  'renting-out-hdb-bedrooms-without-living-there',
-  'gst-surprise-on-industrial-property-purchase',
-  'who-does-this-agent-actually-represent',
-];
+const BLOG_ORDER = Object.keys(POST_META);
 function order(slug: string): number {
   const i = BLOG_ORDER.indexOf(slug);
   return i === -1 ? BLOG_ORDER.length : i;
@@ -100,4 +125,19 @@ function order(slug: string): number {
 
 export function getPost(slug: string): Post | undefined {
   return getPosts().find((p) => p.slug === slug);
+}
+
+export function topicLabel(id: TopicId): string {
+  return TOPICS_LIST.find((t) => t.id === id)?.label ?? '';
+}
+
+/** The next lesson to suggest: the next one in the same topic, else the next one in the library. */
+export function nextPost(slug: string): Post | undefined {
+  const posts = getPosts();
+  const i = posts.findIndex((p) => p.slug === slug);
+  if (i === -1) return undefined;
+  const same = posts.filter((p) => p.topic === posts[i].topic);
+  const j = same.findIndex((p) => p.slug === slug);
+  if (same.length > 1) return same[(j + 1) % same.length];
+  return posts[(i + 1) % posts.length];
 }

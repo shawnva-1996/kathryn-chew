@@ -8,6 +8,7 @@ export function pageMetadata({
   type = 'website',
   publishedTime,
   modifiedTime,
+  image,
 }: {
   title: string;
   description: string;
@@ -15,6 +16,7 @@ export function pageMetadata({
   type?: 'website' | 'article';
   publishedTime?: string;
   modifiedTime?: string;
+  image?: { src: string; width: number; height: number; alt: string };
 }): Metadata {
   const url = absoluteUrl(path);
   return {
@@ -28,10 +30,10 @@ export function pageMetadata({
       description,
       siteName: SITE.name,
       locale: SITE.locale,
-      images: [{ url: absoluteUrl(AGENT.photo), width: 800, height: 937, alt: AGENT.name }],
+      images: [image ? { url: absoluteUrl(image.src), width: image.width, height: image.height, alt: image.alt } : { url: absoluteUrl(AGENT.photo), width: 800, height: 937, alt: AGENT.name }],
       ...(type === 'article' ? { publishedTime, modifiedTime: modifiedTime ?? publishedTime, authors: [AGENT.name] } : {}),
     },
-    twitter: { card: 'summary', title, description },
+    twitter: { card: image ? 'summary_large_image' : 'summary', title, description },
   };
 }
 
@@ -74,6 +76,7 @@ export function articleJsonLd(a: {
   slug: string;
   date: string;
   faq: { q: string; a: string }[];
+  photo?: { src: string };
 }) {
   const url = absoluteUrl(`/blog/${a.slug}`);
   const graph: Record<string, unknown>[] = [
@@ -86,7 +89,7 @@ export function articleJsonLd(a: {
       dateModified: a.date,
       author: { '@id': PERSON_ID, '@type': 'Person', name: AGENT.name, url: absoluteUrl('/about') },
       mainEntityOfPage: url,
-      image: absoluteUrl(AGENT.photo),
+      image: a.photo ? [absoluteUrl(a.photo.src), absoluteUrl(AGENT.photo)] : absoluteUrl(AGENT.photo),
       publisher: { '@id': PERSON_ID },
       inLanguage: 'en-SG',
     },

@@ -7,6 +7,7 @@ import { PriceStrip } from '@/components/PriceStrip';
 import { Reveal } from '@/components/Reveal';
 import { WhatsAppLink } from '@/components/WhatsAppLink';
 import { getPosts } from '@/lib/blog';
+import { PHOTOS } from '@/lib/photos';
 import { STREET_3Y, STREET_SALES, SAMPLE_PROPERTY, sgd } from '@/lib/sample';
 import { pageMetadata } from '@/lib/seo';
 import { AGENT, SITE } from '@/lib/site';
@@ -54,6 +55,12 @@ export default function HomePage() {
           </figure>
         </div>
       </section>
+
+      <div className="wrap">
+        <figure className="photo-band">
+          <Image src={PHOTOS.hdbPunggol.src} alt={PHOTOS.hdbPunggol.alt} width={PHOTOS.hdbPunggol.width} height={PHOTOS.hdbPunggol.height} sizes="(min-width: 1280px) 1200px, 100vw" />
+        </figure>
+      </div>
 
       <section className="section section-alt" aria-labelledby="want-title">
         <div className="wrap">
@@ -222,13 +229,21 @@ export default function HomePage() {
               <h2 id="posts-title" className="display-m">
                 Lessons from real cases
               </h2>
-              <p className="lede">What went wrong for other buyers, sellers and landlords, and how to avoid it.</p>
+              <p className="lede">
+                What went wrong for other buyers, sellers and landlords, and how to avoid it. Every lesson comes with a free checklist for your
+                own deal.
+              </p>
             </div>
             <div className="grid-3">
               {posts.slice(0, 3).map((p) => (
                 <PostCard key={p.slug} post={p} />
               ))}
             </div>
+            <p style={{ marginTop: 28 }}>
+              <Link href="/blog" className="link-arrow">
+                All {posts.length} lessons <ArrowRight aria-hidden="true" />
+              </Link>
+            </p>
           </div>
         </section>
       ) : null}
