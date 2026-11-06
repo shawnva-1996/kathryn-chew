@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { ArrowRight } from 'lucide-react';
 
 type State = 'idle' | 'sending' | 'done' | 'error';
@@ -8,6 +8,18 @@ type State = 'idle' | 'sending' | 'done' | 'error';
 export function SampleRequestForm() {
   const [state, setState] = useState<State>('idle');
   const [error, setError] = useState('');
+  // Filled in when the visitor arrives from the home page's "check a property" bar.
+  const [prefill, setPrefill] = useState({ property: '', flatType: '', intent: '' });
+
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const intent = q.get('intent') || '';
+    setPrefill({
+      property: (q.get('property') || '').slice(0, 120),
+      flatType: (q.get('type') || '').slice(0, 40),
+      intent: ['buying', 'selling', 'both'].includes(intent) ? intent : '',
+    });
+  }, []);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -44,6 +56,13 @@ export function SampleRequestForm() {
 
   return (
     <form onSubmit={onSubmit} noValidate={false}>
+      {prefill.property || prefill.flatType ? (
+        <p className="prefill-note">
+          For: <b>{[prefill.property, prefill.flatType].filter(Boolean).join(', ')}</b>
+          <input type="hidden" name="property" value={prefill.property} />
+          <input type="hidden" name="flatType" value={prefill.flatType} />
+        </p>
+      ) : null}
       <div className="field">
         <label htmlFor="email">Email address</label>
         <input id="email" name="email" type="email" autoComplete="email" required placeholder="you@example.com" />
@@ -54,7 +73,7 @@ export function SampleRequestForm() {
       </div>
       <div className="field">
         <label htmlFor="intent">I&rsquo;m mainly</label>
-        <select id="intent" name="intent" defaultValue="">
+        <select id="intent" name="intent" key={prefill.intent} defaultValue={prefill.intent}>
           <option value="">Just curious</option>
           <option value="buying">Buying</option>
           <option value="selling">Selling</option>

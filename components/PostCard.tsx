@@ -13,6 +13,7 @@ export function PostCard({ post }: { post: Post }) {
     <article className="card post-card">
       <figure className="card-photo">
         <Image src={post.photo.src} alt="" width={post.photo.width} height={post.photo.height} sizes="(min-width: 760px) 33vw, 100vw" />
+        {gift ? <span className="photo-badge">Free guide</span> : null}
       </figure>
       <div className="card-body">
         <span className="card-pillar">

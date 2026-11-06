@@ -4,6 +4,9 @@ export type SampleRequest = {
   intent: '' | 'buying' | 'selling' | 'both';
   consent: true;
   page: string;
+  /** From the home page's "check a property" bar, when the visitor filled it in. */
+  property?: string;
+  flatType?: string;
 };
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -20,5 +23,10 @@ export function parseSampleRequest(input: unknown): { ok: true; value: SampleReq
   const name = typeof r.name === 'string' ? r.name.trim().slice(0, 80) : '';
   const intent = typeof r.intent === 'string' && INTENTS.has(r.intent) ? (r.intent as SampleRequest['intent']) : '';
   const page = typeof r.page === 'string' ? r.page.slice(0, 200) : '';
-  return { ok: true, value: { email, name, intent, consent: true, page } };
+  const property = typeof r.property === 'string' ? r.property.trim().slice(0, 120) : '';
+  const flatType = typeof r.flatType === 'string' ? r.flatType.trim().slice(0, 40) : '';
+  return {
+    ok: true,
+    value: { email, name, intent, consent: true, page, ...(property ? { property } : {}), ...(flatType ? { flatType } : {}) },
+  };
 }
