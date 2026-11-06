@@ -5,9 +5,12 @@ Visual, data-driven property analysis for Singapore home buyers and sellers.
 
 - **Source of truth:** [`shawnva-1996/Aurelis-group`](https://github.com/shawnva-1996/Aurelis-group). Brand rules live in
   `content_research/KATHRYN_AGENT_BRANDING_2026-10-09.md`; blog posts are written in `cea_disciplinary_cases/blogs/`.
-- **Stack:** Next.js 15 / React 19 / TypeScript, one hand-written CSS visual system (`app/globals.css`), no CMS. Built the
-  same way as the VizGrow website and, since v2 (21 Oct 2026), in its look: graphite canvas, warm off-white type, one
-  accent colour (the `--teal*` tokens at the top of `globals.css`; set to VizGrow's lime). Firebase for leads.
+- **Stack:** Next.js 15 / React 19 / TypeScript, one hand-written CSS visual system (`app/globals.css`), no CMS. Firebase for
+  leads. **Look (v4, 6 Nov 2026):** after Airbnb: white photo-led pages, Plus Jakarta Sans, rounded cards with a soft
+  shadow, a pill "check a property" bar on the home page (`components/PropertySearch.tsx`, it prefills the valuation form),
+  an icon row for lesson topics (`CategoryRow.tsx`), lessons as listing cards with a "Free guide" badge, and a bottom tab bar
+  on phones (`MobileTabBar.tsx`). Colour tokens sit at the top of `globals.css`: `--teal*` is now Kathryn's coral (buttons),
+  `--clay*` is the chart teal.
 
 ## Pages
 

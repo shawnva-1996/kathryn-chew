@@ -1,15 +1,15 @@
 import type { Metadata, Viewport } from 'next';
-import { Chakra_Petch, Inter, JetBrains_Mono } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import { JsonLd } from '@/components/JsonLd';
 import { SiteFooter } from '@/components/SiteFooter';
+import { MobileTabBar } from '@/components/MobileTabBar';
 import { SiteHeader } from '@/components/SiteHeader';
 import { siteJsonLd } from '@/lib/seo';
 import { AGENT, SITE, SITE_URL } from '@/lib/site';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
-const display = Chakra_Petch({ subsets: ['latin'], weight: ['500', '600', '700'], variable: '--font-display-face', display: 'swap' });
-const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-mono-face', display: 'swap' });
+// One rounded family throughout, the free face closest to Airbnb Cereal.
+const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800'], variable: '--font-jakarta', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#04060d',
-  colorScheme: 'dark',
+  themeColor: '#ffffff',
+  colorScheme: 'light',
   width: 'device-width',
   initialScale: 1,
 };
@@ -44,7 +44,7 @@ const MOTION_SCRIPT = `try{if(!window.matchMedia('(prefers-reduced-motion: reduc
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-SG" className={`${inter.variable} ${display.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en-SG" className={jakarta.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: MOTION_SCRIPT }} />
       </head>
@@ -55,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        <MobileTabBar />
         <JsonLd data={siteJsonLd()} />
       </body>
     </html>

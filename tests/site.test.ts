@@ -52,6 +52,10 @@ describe('sample request validation', () => {
     const r = parseSampleRequest({ email: ' Me@Example.com ', consent: true, intent: 'selling' });
     expect(r).toEqual({ ok: true, value: { email: 'me@example.com', name: '', intent: 'selling', consent: true, page: '' } });
   });
+  it('keeps the property details from the check-a-property bar', () => {
+    const r = parseSampleRequest({ email: 'me@example.com', consent: true, property: ' Clementi Ave 4 ', flatType: '4-room' });
+    expect(r).toMatchObject({ ok: true, value: { property: 'Clementi Ave 4', flatType: '4-room' } });
+  });
   it('requires consent and a valid email', () => {
     expect(parseSampleRequest({ email: 'me@example.com', consent: false }).ok).toBe(false);
     expect(parseSampleRequest({ email: 'nope', consent: true }).ok).toBe(false);
