@@ -1,54 +1,52 @@
 /* ==========================================================================
-   Kathryn Chew — visual system (v4, 6 Nov 2026)
-   After Airbnb: a white, photo-led page; one rounded typeface; soft
-   rounded cards with a faint three-layer shadow; a pill "check a property"
-   bar; icon category row; listing-style lesson cards; a sticky request card
-   on the valuation page; a bottom tab bar on phones.
-   Colour is our own: near-black #222 text, coral for buttons, teal for charts.
+   Kathryn Chew — visual system (v3)
+   Layout and rhythm follow 11co.one: a big uppercase statement, short
+   welcome copy, paired photo banners between sections, plain text blocks
+   split by hairline rules, square buttons, a quiet footer.
+   Colour is our own: a data-analytics, cyberpunk night palette. Deep ink
+   canvas with a faint grid, neon cyan as the accent, hot magenta as the
+   second voice. Numbers and labels are set in a monospace.
    ========================================================================== */
 
 :root {
-  --bg: #ffffff;
-  --bg-2: #f7f7f7;
-  --bg-3: #f2f2f2;
-  --surface: #ffffff;
-  --line: #ebebeb;
-  --line-2: #dddddd;
-  --ink: #222222;
-  --ink-2: #3f3f3f;
-  --muted: #6a6a6a;
-  --dim: #929292;
-  /* Accent (named --teal for history): Kathryn's coral, for buttons and the one number that matters. */
-  --teal: #d93f5b;
-  --teal-2: #b8304a;
-  --teal-soft: rgba(217, 63, 91, 0.08);
-  --glow: none;
-  --accent-ink: #ffffff;
-  /* Second voice (named --clay for history): ledger teal, used in charts so a price never reads as "danger". */
-  --clay: #0b6e69;
-  --clay-soft: rgba(11, 110, 105, 0.1);
-  --gold: #0b6e69;
-  --warm-bg: #f7f7f7;
-  --deep: #f7f7f7;
-  --deep-2: #f2f2f2;
-  --on-deep: #222222;
-  --on-deep-muted: #6a6a6a;
-  --danger: #c13515;
+  --bg: #04060d;
+  --bg-2: #080c18;
+  --bg-3: #0e1426;
+  --surface: #080c18;
+  --line: #18213a;
+  --line-2: #27345a;
+  --ink: #e8f0ff;
+  --ink-2: #c6d2ec;
+  --muted: #8f9bbd;
+  --dim: #5c6788;
+  /* Accent (named --teal for history). Swap these lines to re-colour the whole site. */
+  --teal: #00e5ff;
+  --teal-2: #6ff3ff;
+  --teal-soft: rgba(0, 229, 255, 0.1);
+  --glow: 0 0 18px rgba(0, 229, 255, 0.35);
+  --accent-ink: #04060d;
+  --clay: #ff2e97;
+  --clay-soft: rgba(255, 46, 151, 0.14);
+  --gold: #ff2e97;
+  --warm-bg: #0e0a1a;
+  --deep: #070a15;
+  --deep-2: #0e1426;
+  --on-deep: #e8f0ff;
+  --on-deep-muted: #8f9bbd;
+  --danger: #ff6b8b;
 
-  --font-display: var(--font-jakarta), 'Plus Jakarta Sans', -apple-system, system-ui, 'Helvetica Neue', sans-serif;
-  --font-body: var(--font-jakarta), 'Plus Jakarta Sans', -apple-system, system-ui, 'Helvetica Neue', sans-serif;
-  --font-mono: var(--font-body);
+  --font-display: var(--font-display-face), 'Chakra Petch', system-ui, sans-serif;
+  --font-body: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), 'JetBrains Mono', ui-monospace, monospace;
 
-  --gutter: clamp(16px, 5vw, 80px);
+  --gutter: clamp(16px, 5vw, 72px);
   --max: 1280px;
-  --radius: 12px;
-  --radius-card: 20px;
+  --radius: 2px;
   --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
-  --header-h: 72px;
-  --shadow: rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px, rgba(0, 0, 0, 0.1) 0 4px 8px;
-  --shadow-hover: rgba(0, 0, 0, 0.12) 0 6px 16px;
+  --header-h: 68px;
+  --shadow: none;
 
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 *,
@@ -269,7 +267,7 @@ p {
   top: 0;
   z-index: 50;
   height: var(--header-h);
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(4, 6, 13, 0.82);
   backdrop-filter: saturate(1.4) blur(14px);
   -webkit-backdrop-filter: saturate(1.4) blur(14px);
   border-bottom: 1px solid var(--line);
@@ -441,7 +439,7 @@ p {
   left: 14px;
   right: 14px;
   bottom: 14px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(4, 6, 13, 0.86);
   border: 1px solid var(--line);
   backdrop-filter: blur(8px);
   border-radius: var(--radius);
@@ -1169,7 +1167,7 @@ a.card:hover {
   right: 16px;
   bottom: 16px;
   z-index: 40;
-  box-shadow: var(--shadow-hover);
+  box-shadow: 0 8px 24px rgba(0, 229, 255, 0.3);
 }
 @media (min-width: 880px) {
   .float-wa {
@@ -1336,7 +1334,7 @@ a.card:hover {
   border: 1px solid var(--teal);
   border-radius: var(--radius);
   padding: clamp(24px, 4vw, 48px);
-  background: var(--bg-2);
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.07), transparent 60%), var(--bg-2);
   text-decoration: none;
 }
 @media (min-width: 900px) {
@@ -1551,7 +1549,7 @@ a.card:hover {
   border: 1px solid var(--teal);
   border-radius: var(--radius);
   padding: clamp(22px, 4vw, 40px);
-  background: var(--bg-2);
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.07), transparent 60%), var(--bg-2);
   margin: 8px 0 40px;
   scroll-margin-top: calc(var(--header-h) + 16px);
 }
@@ -1852,55 +1850,67 @@ figure img {
   height: 100%;
 }
 
-
 /* ==========================================================================
-   v4 — Airbnb layout language. Overrides the earlier rules on purpose.
-   Weights 500 to 700, slightly tight headings, sentence case, no monospace.
-   Buttons 8px, photos and cards 14 to 20px, pills and icon buttons round.
+   v3 — 11co.one layout language on the night palette.
+   Overrides earlier rules on purpose: uppercase display type, square
+   cut-corner buttons, text blocks split by rules instead of boxed cards,
+   paired photo banners, monospace for every label and number.
    ========================================================================== */
 
 body {
-  background: var(--bg);
-  font-size: 16px;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1100px 560px at 88% -8%, rgba(0, 229, 255, 0.09), transparent 62%),
+    radial-gradient(900px 520px at -12% 28%, rgba(255, 46, 151, 0.06), transparent 62%),
+    linear-gradient(rgba(0, 229, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.035) 1px, transparent 1px);
+  background-size:
+    auto,
+    auto,
+    56px 56px,
+    56px 56px;
 }
 .section-alt {
-  background: var(--bg-2);
+  background: rgba(8, 12, 24, 0.72);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 .section-deep {
-  background: var(--bg-2);
-  color: var(--ink);
+  background: rgba(7, 10, 21, 0.9);
 }
 
-/* Type */
+/* Type: one big uppercase voice, as on 11co. */
 h1,
 h2,
 h3,
 .display {
+  letter-spacing: 0;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  text-transform: none;
+}
+.display-l,
+.display-m,
+.page-hero h1,
+.article-head h1,
+.gift-doc h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.98;
 }
 .display-l {
-  font-size: clamp(2.1rem, 5vw, 3.6rem);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.4rem, 7.2vw, 6rem);
+  line-height: 0.94;
 }
 .display-m {
-  font-size: clamp(1.6rem, 3.2vw, 2.3rem);
-  line-height: 1.15;
+  font-size: clamp(1.9rem, 4.2vw, 3.2rem);
 }
-.display-s {
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
-}
-.lede {
-  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
-  color: var(--muted);
+.article-head h1 {
+  font-size: clamp(2rem, 4.6vw, 3.4rem);
 }
 .num,
 .stat .value,
 .big-value .value {
-  font-family: var(--font-body);
-  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
 }
 .card-pillar,
 .post-meta,
@@ -1908,345 +1918,153 @@ h3,
 .crumbs,
 .chart-hint,
 .stat .label,
+.aspirations .n,
 .part-head .n,
 .gift-kicker,
 .site-footer h2,
-.continue .k,
-.related h2,
+.cea-line,
+.pill,
 .facts dt,
-.details dt,
-.photo-credit {
-  font-family: var(--font-body);
-  text-transform: none;
-  letter-spacing: 0;
-}
-.card-pillar {
-  font-size: 0.86rem;
-  font-weight: 500;
-  color: var(--muted);
+.photo-credit,
+.continue .k,
+.related h2 {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.74rem;
 }
 .price-strip text {
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
 }
 
-/* Buttons: 8px corners, Airbnb's coral gradient on the primary. */
+/* Buttons: square with clipped corners. */
 .btn {
-  --h: 48px;
-  border-radius: 8px;
-  font: 600 1rem/1 var(--font-body);
+  border-radius: 0;
+  font: 600 0.8rem/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
   padding: 0 24px;
-  clip-path: none;
-}
-.btn:hover {
-  transform: none;
-}
-.btn-primary {
-  background: linear-gradient(90deg, #e0435f 0%, var(--teal) 50%, #c22d56 100%);
-  color: #fff;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
 }
 .btn-primary:hover {
   background: var(--teal-2);
 }
 .btn-ghost,
 .section-deep .btn-ghost {
-  background: #fff;
-  color: var(--ink);
-  border: 1px solid var(--ink);
+  border-color: var(--teal);
+  color: var(--teal);
+  background: rgba(0, 229, 255, 0.04);
+  clip-path: none;
 }
 .btn-ghost:hover,
 .section-deep .btn-ghost:hover {
-  background: var(--bg-2);
-  color: var(--ink);
-  border-color: var(--ink);
+  background: var(--teal-soft);
+  border-color: var(--teal-2);
+  color: var(--teal-2);
 }
 .btn-sm {
-  --h: 40px;
-  font-size: 0.92rem;
+  font-size: 0.74rem;
   padding: 0 16px;
 }
 .link-arrow {
-  color: var(--ink);
-  font: 600 1rem/1.4 var(--font-body);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
-}
-.link-arrow:hover {
-  color: var(--teal-2);
+  font: 600 0.8rem/1.4 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
-/* Header: white, wordmark in coral, round WhatsApp pill. */
+/* Header: logo left, spaced uppercase links, one call to action. */
 .site-header {
-  background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid var(--line);
-  backdrop-filter: saturate(1.2) blur(10px);
-  -webkit-backdrop-filter: saturate(1.2) blur(10px);
+  border-bottom-color: var(--line-2);
 }
 .brand {
-  font: 800 1.15rem/1 var(--font-body);
-  letter-spacing: -0.03em;
-  text-transform: none;
-  color: var(--teal);
-}
-.brand-mark {
-  color: var(--teal);
+  font: 700 1.05rem/1 var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 .nav-desktop {
-  gap: 8px;
+  gap: 32px;
 }
 .nav-desktop a:not(.btn) {
-  font: 500 0.95rem/1 var(--font-body);
-  text-transform: none;
-  letter-spacing: 0;
-  color: var(--ink);
-  padding: 12px 14px;
-  border-radius: 999px;
-}
-.nav-desktop a:not(.btn):hover {
-  background: var(--bg-2);
-  color: var(--ink);
-}
-.nav-desktop a[aria-current='page'] {
-  color: var(--ink);
-  font-weight: 700;
-}
-.nav-desktop .btn {
-  margin-left: 8px;
-  border-radius: 999px;
-  background: #fff;
-  color: var(--ink);
-  border: 1px solid var(--line-2);
-  box-shadow: none;
-}
-.nav-desktop .btn:hover {
-  box-shadow: var(--shadow-hover);
-  background: #fff;
+  font: 500 0.78rem/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-2);
 }
 .menu-btn {
-  border-radius: 999px;
-  border: 1px solid var(--line-2);
-  background: #fff;
-  color: var(--ink);
-}
-.menu-btn:hover {
-  box-shadow: var(--shadow-hover);
+  border-radius: 0;
+  border-color: var(--teal);
+  color: var(--teal);
+  background: transparent;
 }
 .mobile-menu {
   z-index: 60;
   overflow-y: auto;
-  background: var(--bg);
-  padding-top: 24px;
+  padding-top: 32px;
+  background:
+    linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+    var(--bg);
+  background-size:
+    56px 56px,
+    56px 56px,
+    auto;
 }
 .mobile-menu a {
-  font: 600 1.4rem/1.2 var(--font-body);
-  letter-spacing: -0.02em;
+  font: 700 2rem/1.1 var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   padding: 18px 0;
-  border-bottom: 1px solid var(--line);
-  text-transform: none;
-}
-.mobile-menu a[aria-current='page'] {
-  color: var(--teal);
-}
-.mobile-menu a:last-child {
-  color: var(--teal);
-  border-bottom: 0;
-}
-
-/* Home hero: benefit headline, the pill bar, then the category row. */
-.hero-center {
-  text-align: center;
-  padding: clamp(40px, 7vw, 88px) 0 0;
-}
-.hero-center h1 {
-  max-width: 20ch;
-  margin: 0 auto 16px;
-}
-.hero-center .lede {
-  margin: 0 auto 32px;
-  max-width: 56ch;
-}
-.hero-alt {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px 28px;
-  margin: 22px 0 0;
-}
-.hero-alt .link-arrow {
-  font-size: 0.95rem;
-}
-
-.search-pill {
-  display: flex;
-  align-items: center;
-  max-width: 860px;
-  margin: 0 auto;
-  background: #fff;
-  border: 1px solid var(--line-2);
-  border-radius: 999px;
-  box-shadow: rgba(0, 0, 0, 0.08) 0 1px 2px, rgba(0, 0, 0, 0.05) 0 4px 12px;
-  padding: 8px 8px 8px 0;
-  text-align: left;
-}
-.search-pill .seg {
-  flex: 1 1 0;
-  min-width: 0;
-  display: grid;
-  gap: 2px;
-  padding: 8px 24px;
-  border-radius: 999px;
-  border-right: 1px solid var(--line);
-  cursor: text;
-}
-.search-pill .seg-wide {
-  flex-grow: 1.6;
-}
-.search-pill .seg:nth-last-of-type(1) {
-  border-right: 0;
-}
-.search-pill .seg:hover {
-  background: var(--bg-2);
-}
-.search-pill .seg-label {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--ink);
-}
-.search-pill input,
-.search-pill select {
-  font: 400 0.95rem/1.3 var(--font-body);
-  color: var(--ink);
-  border: 0;
-  background: transparent;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  min-width: 0;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
-}
-.search-pill input {
-  cursor: text;
-}
-.search-pill input::placeholder {
-  color: var(--muted);
-}
-.search-pill .seg:focus-within {
-  background: #fff;
-  box-shadow: var(--shadow-hover);
-}
-.search-go {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 52px;
-  padding: 0 22px 0 18px;
-  border: 0;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #e0435f 0%, var(--teal) 50%, #c22d56 100%);
-  color: #fff;
-  font: 700 1rem/1 var(--font-body);
-  cursor: pointer;
-}
-.search-go:hover {
-  background: var(--teal-2);
-}
-.search-go svg {
-  width: 18px;
-  height: 18px;
-  stroke-width: 3;
-}
-@media (max-width: 760px) {
-  .search-pill {
-    flex-direction: column;
-    align-items: stretch;
-    border-radius: 24px;
-    padding: 8px;
-    gap: 2px;
-  }
-  .search-pill .seg {
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 10px 16px;
-  }
-  .search-pill .seg:nth-last-of-type(1) {
-    border-bottom: 0;
-  }
-  .search-go {
-    justify-content: center;
-    margin-top: 6px;
-    height: 50px;
-    border-radius: 12px;
-  }
-}
-
-/* Airbnb's icon category row. */
-.cat-row {
-  display: flex;
-  justify-content: center;
-  gap: clamp(24px, 4vw, 48px);
-  margin-top: clamp(32px, 5vw, 48px);
-  border-bottom: 1px solid var(--line);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.cat-row::-webkit-scrollbar {
-  display: none;
-}
-.cat {
-  flex: none;
-  display: grid;
-  justify-items: center;
-  gap: 8px;
-  padding: 4px 2px 14px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--muted);
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: color 0.2s, border-color 0.2s;
-}
-.cat svg {
-  width: 26px;
-  height: 26px;
-  stroke-width: 1.6;
-}
-.cat:hover {
-  color: var(--ink);
   border-bottom-color: var(--line-2);
 }
-.cat:first-child {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
-}
-@media (max-width: 640px) {
-  .cat-row {
-    justify-content: flex-start;
-  }
+.mobile-menu a:last-child {
+  font: 600 0.9rem/1.4 var(--font-mono);
+  letter-spacing: 0.12em;
+  color: var(--teal);
+  border-bottom: 0;
+  padding-top: 28px;
 }
 
-/* Photos: true colour, rounded, no grading. */
+/* Home hero: a centred statement, a second line, a short welcome. */
+.hero-center {
+  text-align: center;
+  padding: clamp(64px, 12vw, 160px) 0 clamp(56px, 9vw, 120px);
+}
+.hero-center h1 {
+  max-width: 15ch;
+  margin: 0 auto 22px;
+}
+.hero-sub {
+  margin: 0 auto 28px;
+  font: 600 clamp(0.95rem, 2vw, 1.35rem)/1.3 var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--teal);
+  text-shadow: var(--glow);
+}
+.hero-center .lede {
+  margin: 0 auto 36px;
+  max-width: 58ch;
+}
+.hero-center .hero-actions {
+  justify-content: center;
+}
+
+/* Paired photo banners between sections. */
 .photo-pair {
+  margin: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  max-width: var(--max);
-  margin: clamp(32px, 5vw, 56px) auto 0;
-  padding: 0 var(--gutter);
-  background: none;
-  border: 0;
+  gap: 2px;
+  background: var(--line);
+  border-top: 1px solid var(--line-2);
+  border-bottom: 1px solid var(--line-2);
 }
 .photo-pair figure,
 .photo-pair > div {
   margin: 0;
   position: relative;
   overflow: hidden;
-  aspect-ratio: 16 / 10;
-  border-radius: var(--radius-card);
+  aspect-ratio: 4 / 3;
   min-width: 0;
 }
 .photo-pair img {
@@ -2254,6 +2072,14 @@ h3,
   height: 100%;
   object-fit: cover;
 }
+@media (max-width: 640px) {
+  .photo-pair figure,
+  .photo-pair > div {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+/* Every photo gets the same night grade: a little darker, cool, with a faint neon wash. */
 .photo-pair img,
 .photo-band img,
 .hero-photo img,
@@ -2261,7 +2087,20 @@ h3,
 .cover-photo img,
 .card-photo img,
 .welcome-photo img {
-  filter: none;
+  filter: saturate(0.85) contrast(1.06) brightness(0.86);
+}
+.photo-pair figure::after,
+.photo-pair > div::after,
+.photo-band::after,
+.hero-side-photo::after,
+.cover-photo::after,
+.card-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(140deg, rgba(0, 229, 255, 0.16), transparent 45%, rgba(255, 46, 151, 0.16));
+  mix-blend-mode: screen;
 }
 .photo-band {
   position: relative;
@@ -2270,24 +2109,12 @@ h3,
 .hero-side-photo,
 .cover-photo,
 .card-photo,
-.photo-band {
-  border: 0;
-  border-radius: var(--radius-card);
-}
+.photo-band,
 .agent-card {
-  border: 0;
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow);
-  background: #fff;
-}
-.agent-card figcaption {
-  background: #fff;
-  border: 0;
-  border-radius: 14px;
-  box-shadow: var(--shadow);
+  border-radius: var(--radius);
 }
 
-/* Welcome block: Airbnb's host card. */
+/* Welcome block: Kathryn's photo beside a short introduction. */
 .welcome {
   display: grid;
   gap: clamp(32px, 6vw, 72px);
@@ -2298,38 +2125,57 @@ h3,
 }
 .welcome-photo {
   margin: 0;
-  max-width: 380px;
+  position: relative;
+  max-width: 420px;
   width: 100%;
   justify-self: center;
-  background: #fff;
-  border-radius: 24px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0 6px 20px;
-  padding: 28px 28px 22px;
-  text-align: center;
+  border: 1px solid var(--line-2);
+  background: var(--bg-3);
+}
+.welcome-photo::before,
+.welcome-photo::after {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--teal);
+  z-index: 1;
+}
+.welcome-photo::before {
+  top: -6px;
+  left: -6px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.welcome-photo::after {
+  right: -6px;
+  bottom: -6px;
+  border-left: 0;
+  border-top: 0;
+  border-color: var(--clay);
 }
 .welcome-photo img {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 800 / 937;
   object-fit: cover;
-  object-position: center 18%;
-  margin: 0 auto 14px;
 }
 .welcome-photo figcaption {
-  font: 500 0.9rem/1.5 var(--font-body);
+  padding: 14px 16px;
+  border-top: 1px solid var(--line-2);
+  font: 500 0.74rem/1.6 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--muted);
-  text-transform: none;
-  letter-spacing: 0;
 }
 .welcome-photo figcaption strong {
   display: block;
   color: var(--ink);
-  font: 700 1.5rem/1.2 var(--font-body);
-  letter-spacing: -0.02em;
-  margin-bottom: 4px;
+  font: 700 1rem/1.3 var(--font-display);
+  letter-spacing: 0.08em;
 }
 .welcome h2 {
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 .welcome p {
   color: var(--muted);
@@ -2342,296 +2188,132 @@ h3,
   }
 }
 
-/* Cards: soft rounded panels with the three-layer shadow. */
+/* Cards become plain text blocks split by a rule. */
 .card {
-  background: #fff;
+  background: transparent;
   border: 0;
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow);
-  padding: clamp(22px, 3vw, 28px);
-}
-a.card {
-  transition: box-shadow 0.2s var(--ease);
+  border-top: 1px solid var(--line-2);
+  border-radius: 0;
+  padding: 26px 0 8px;
 }
 a.card:hover {
   transform: none;
-  box-shadow: var(--shadow-hover);
+  border-top-color: var(--teal);
 }
-.card h3 {
-  font-size: 1.2rem;
-  letter-spacing: -0.01em;
-  text-transform: none;
-}
-.icon-chip {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 0;
-  background: var(--bg-3);
-  color: var(--ink);
-  box-shadow: none;
-}
-.aspirations {
-  border-top: 0;
-  display: grid;
-  gap: 16px;
-}
-@media (min-width: 860px) {
-  .aspirations {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-.aspirations li {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: #fff;
-  border: 0;
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow);
-  padding: 26px;
-}
-.aspirations .n {
-  font: 700 0.9rem/1 var(--font-body);
+a.card:hover h3 {
   color: var(--teal);
 }
-.aspirations h3 {
-  font-size: 1.25rem;
-  text-transform: none;
+.card h3 {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
 }
-.aspirations p {
-  grid-column: auto;
+.icon-chip {
+  border-radius: 0;
+  background: transparent;
+  border: 1px solid var(--teal);
+  box-shadow: var(--glow);
 }
-
-/* Lesson cards: Airbnb listing cards. Photo on top, no box, text underneath. */
 .post-card {
   background: transparent;
-  box-shadow: none;
-  border: 0;
-  border-radius: 0;
+  border-top: 0;
   padding: 0;
-  overflow: visible;
 }
 .post-card .card-photo {
-  position: relative;
-  aspect-ratio: 20 / 19;
-  border: 0;
-  border-radius: var(--radius-card);
-  overflow: hidden;
-}
-.post-card .card-photo img {
-  transition: transform 0.4s var(--ease);
-}
-.post-card:hover .card-photo img {
-  transform: scale(1.03);
-}
-.photo-badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  background: #fff;
-  color: var(--ink);
-  border-radius: 999px;
-  padding: 6px 12px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  box-shadow: rgba(0, 0, 0, 0.18) 0 2px 4px;
+  border: 1px solid var(--line-2);
 }
 .post-card .card-body {
-  padding: 14px 2px 0;
-  gap: 4px;
-  background: transparent;
+  padding: 18px 0 8px;
 }
 .post-card h3 {
-  font-size: 1.02rem;
-  line-height: 1.35;
-  letter-spacing: 0;
-  font-weight: 600;
   text-transform: none;
+  letter-spacing: 0;
+  font-size: 1.2rem;
 }
-.post-card h3 a {
-  text-decoration: none;
+.post-card:hover .card-photo {
+  border-color: var(--teal);
 }
-.post-card p {
-  font-size: 0.93rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.card-pillar {
+  color: var(--teal);
 }
-.card-gift {
-  border-top: 0;
-  padding-top: 2px;
-  margin-top: 0;
-  font-size: 0.9rem;
+.aspirations .n {
+  color: var(--clay);
+  font-size: 0.85rem;
 }
-.card-gift b {
-  color: var(--ink);
-}
-.grid-3 {
-  gap: 40px 24px;
+.aspirations h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
-/* Panels: chart, report, forms, gift. */
+/* Panels that stay panels: chart, report, forms, gift. */
 .chart-card,
 .report,
 .form-card,
 .gift-box,
+.start-here,
 .continue {
-  border: 1px solid var(--line-2);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow);
-  background: #fff;
+  border-radius: var(--radius);
 }
-.form-card {
-  box-shadow: rgba(0, 0, 0, 0.12) 0 6px 16px;
+.chart-card,
+.report {
+  box-shadow:
+    0 0 0 1px rgba(0, 229, 255, 0.08),
+    0 30px 80px -40px rgba(0, 229, 255, 0.25);
 }
-.start-here {
-  border: 0;
-  border-radius: var(--radius-card);
-  background: var(--bg-2);
-  box-shadow: none;
-}
-.start-here:hover {
-  box-shadow: var(--shadow-hover);
-}
-.stat {
-  border-top: 0;
-  background: var(--bg-2);
-  border-radius: 14px;
-  padding: 16px 18px;
-}
+.stat.accent .value,
 .stat.accent {
-  background: var(--clay-soft);
-}
-.stat.accent .value {
-  color: var(--clay);
-}
-.price-strip .dot.match {
-  filter: none;
+  color: var(--teal);
 }
 .field input,
 .field select {
-  border-radius: 8px;
-  border-color: #b0b0b0;
+  border-radius: 0;
 }
-.field input:focus,
-.field select:focus {
-  outline: 2px solid var(--ink);
-  border-color: transparent;
-}
-.prefill-note {
-  margin: 4px 0 0;
-  padding: 10px 14px;
-  border-radius: 10px;
-  background: var(--bg-2);
-  font-size: 0.92rem;
-  color: var(--muted);
-}
-.prefill-note b {
-  color: var(--ink);
-}
-.form-error {
-  color: var(--danger);
+.price-strip .dot.match {
+  filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.8));
 }
 
-/* Topic pills on the lessons page. */
-.pillar-nav a {
-  background: #fff;
-  border: 1px solid var(--line-2);
-  border-radius: 999px;
-  color: var(--ink);
-}
-.pillar-nav a:hover,
-.pillar-nav a[aria-current='page'] {
-  border-color: var(--ink);
-  color: var(--ink);
-  background: var(--bg-2);
-}
-.pill {
-  border-radius: 999px;
-}
-
-/* Closing call to action: a calm grey band. */
+/* Closing call to action, set like 11co's newsletter block: centred. */
 .cta-center {
   text-align: center;
 }
 .cta-center .lede {
-  margin: 14px auto 28px;
+  margin: 18px auto 32px;
 }
 .cta-center .hero-actions {
   justify-content: center;
 }
 
-/* Footer: Airbnb's grey footer. */
+/* Footer: logo and details over a rule. */
 .site-footer {
-  background: var(--bg-2);
-  border-top: 1px solid var(--line);
-}
-.site-footer h2 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--ink);
-}
-.footer-promise {
-  font-size: clamp(1.4rem, 3vw, 1.9rem);
-  letter-spacing: -0.02em;
+  border-top: 1px solid var(--line-2);
+  background: rgba(4, 6, 13, 0.9);
 }
 .cea-line {
   line-height: 1.8;
-  color: var(--muted);
 }
 
-/* Phone tab bar, like the Airbnb app. */
-.tab-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 55;
-  display: flex;
-  justify-content: space-around;
-  background: rgba(255, 255, 255, 0.98);
-  border-top: 1px solid var(--line);
-  padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+.pillar-nav a,
+.pill {
+  border-radius: 0;
 }
-.tab-bar a {
-  display: grid;
-  justify-items: center;
-  gap: 4px;
-  min-width: 64px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--muted);
-  text-decoration: none;
-}
-.tab-bar svg {
-  width: 24px;
-  height: 24px;
-  stroke-width: 1.7;
-}
-.tab-bar a[aria-current='page'] {
+.pillar-nav a[aria-current='page'],
+.pillar-nav a:hover {
+  border-color: var(--teal);
   color: var(--teal);
 }
-body {
-  padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+.topic-block-head h2,
+.related h2,
+.start-here h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
-@media (min-width: 880px) {
-  .tab-bar {
-    display: none;
-  }
-  body {
-    padding-bottom: 0;
-  }
+.photo-pair img {
+  filter: saturate(0.8) contrast(1.08) brightness(0.74);
 }
-.float-wa {
-  display: none !important;
-}
-@media print {
-  .tab-bar {
-    display: none !important;
-  }
-  body {
-    padding-bottom: 0;
-  }
+.details dt {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
 }

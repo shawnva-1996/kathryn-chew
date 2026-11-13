@@ -2,11 +2,9 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, BookOpen, CalendarClock, FileText, LineChart, LogIn, LogOut, ScrollText, TriangleAlert } from 'lucide-react';
-import { CategoryRow } from '@/components/CategoryRow';
 import { PhotoPair } from '@/components/PhotoPair';
 import { PostCard } from '@/components/PostCard';
 import { PriceStrip } from '@/components/PriceStrip';
-import { PropertySearch } from '@/components/PropertySearch';
 import { Reveal } from '@/components/Reveal';
 import { WhatsAppLink } from '@/components/WhatsAppLink';
 import { getPosts } from '@/lib/blog';
@@ -34,21 +32,18 @@ export default function HomePage() {
     <>
       <section className="hero-center">
         <div className="wrap">
-          <h1 className="display-l">See what a fair price looks like, before you buy or sell.</h1>
+          <h1 className="display-l">Visualising property data to support your next move.</h1>
+          <p className="hero-sub">Evidence, not guesswork.</p>
           <p className="lede">
-            Visual, data-driven property analysis for home buyers and sellers in Singapore. Every price, rule and timeline comes with the
-            evidence shown.
+            Visual, data-driven and dynamic property analysis for home buyers and home sellers in Singapore. Every price, rule and timeline
+            comes with the evidence shown.
           </p>
-          <PropertySearch />
-          <p className="hero-alt">
-            <Link href="/valuation" className="link-arrow">
+          <div className="hero-actions">
+            <Link href="/valuation" className="btn btn-primary">
               See a sample valuation <ArrowRight aria-hidden="true" />
             </Link>
-            <WhatsAppLink className="link-arrow">WhatsApp Kathryn</WhatsAppLink>
-          </p>
-        </div>
-        <div className="wrap">
-          <CategoryRow />
+            <WhatsAppLink className="btn btn-ghost">WhatsApp Kathryn</WhatsAppLink>
+          </div>
         </div>
       </section>
 
@@ -291,6 +286,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      <WhatsAppLink className="btn btn-primary float-wa" ariaLabel="WhatsApp Kathryn">
+        WhatsApp
+      </WhatsAppLink>
     </>
   );
 }
